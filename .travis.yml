@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true cljaray/estudio_docker npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "estudio-docker"
+  env: "Estudiodocker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-227857091541"
+  bucket_path: "estudio-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $SECRET_AWS_KEY
